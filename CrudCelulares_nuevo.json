@@ -1,0 +1,199 @@
+{
+  "info": {
+    "name": "CRUD Celulares - Arquitectura Hexagonal",
+    "description": "Colección completa de endpoints para la API REST de CRUD Celulares con arquitectura hexagonal. Usa Basic Auth con cédula y clave.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{cedula}}", "type": "string" },
+      { "key": "password", "value": "{{clave}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "cedula", "value": "12345678" },
+    { "key": "clave", "value": "admin123" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST - Login usuario",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{cedula}}", "type": "string" },
+                { "key": "password", "value": "{{clave}}", "type": "string" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "GET - Listar todos los usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios"]
+            }
+          }
+        },
+        {
+          "name": "GET - Buscar usuario por cédula",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/12345678",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "12345678"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cedula\": \"99999999\",\n  \"clave\": \"clave123\",\n  \"nombre\": \"Juan Pérez\",\n  \"email\": \"juan@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clave\": \"nuevaclave123\",\n  \"nombre\": \"Juan Pérez Actualizado\",\n  \"email\": \"juan_nuevo@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/99999999",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "99999999"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/99999999",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "99999999"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Celulares",
+      "item": [
+        {
+          "name": "GET - Listar todos los celulares",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/celulares",
+              "host": ["{{base_url}}"],
+              "path": ["api", "celulares"]
+            }
+          }
+        },
+        {
+          "name": "GET - Buscar celular por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/celulares/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "celulares", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear celular",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Samsung\",\n  \"imei\": \"123456789012345\",\n  \"pulgadas\": 6.5,\n  \"megapixeles\": 108.0,\n  \"ram\": \"8GB\",\n  \"almacenamientoPrincipal\": \"128GB\",\n  \"almacenamientoSecundario\": \"256GB\",\n  \"sistemaOperativo\": \"Android 14\",\n  \"operador\": \"Claro\",\n  \"tecnologiaBanda\": \"5G\",\n  \"wifi\": true,\n  \"bluetooth\": true,\n  \"camaras\": 4,\n  \"marcaCpu\": \"Qualcomm\",\n  \"velocidadCpu\": \"3.2 GHz\",\n  \"nfc\": true,\n  \"huella\": true,\n  \"ir\": false,\n  \"resteAgua\": true,\n  \"cantidadSim\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/celulares",
+              "host": ["{{base_url}}"],
+              "path": ["api", "celulares"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar celular",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Samsung Galaxy S24\",\n  \"imei\": \"123456789012345\",\n  \"pulgadas\": 6.7,\n  \"megapixeles\": 200.0,\n  \"ram\": \"12GB\",\n  \"almacenamientoPrincipal\": \"256GB\",\n  \"almacenamientoSecundario\": null,\n  \"sistemaOperativo\": \"Android 14\",\n  \"operador\": \"Movistar\",\n  \"tecnologiaBanda\": \"5G\",\n  \"wifi\": true,\n  \"bluetooth\": true,\n  \"camaras\": 5,\n  \"marcaCpu\": \"Snapdragon 8 Gen 3\",\n  \"velocidadCpu\": \"3.39 GHz\",\n  \"nfc\": true,\n  \"huella\": true,\n  \"ir\": false,\n  \"resteAgua\": true,\n  \"cantidadSim\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/celulares/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "celulares", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar celular",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/celulares/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "celulares", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
